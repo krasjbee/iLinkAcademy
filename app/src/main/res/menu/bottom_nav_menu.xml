@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fragment_random_picure"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_photo_library_24"
+        android:title="@string/bottom_menu_picture_label" />
+    <item
+        android:id="@+id/fragment_favourites"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_star_24"
+        android:title="@string/bottom_menu_favourites_label" />
+</menu>
