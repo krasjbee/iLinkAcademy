@@ -2,4 +2,6 @@
     <string name="app_name">iLinkAcademy</string>
     <string name="bottom_menu_picture_label">Pictures</string>
     <string name="bottom_menu_favourites_label">Favourites</string>
+    <string name="bt_random_cat_label">Random cat</string>
+    <string name="bt_random_duck_label">Random duck</string>
 </resources>
