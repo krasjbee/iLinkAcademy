@@ -20,7 +20,12 @@ class MainActivity : AppCompatActivity() {
         val navHost =
             supportFragmentManager.findFragmentById(R.id.main_container) as NavHostFragment
         val navController = navHost.navController
-
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.fragmentFavourites -> binding.toolbar.title = "Favourites"
+                R.id.fragmentRandomPicture -> binding.toolbar.title = "Random picture"
+            }
+        }
         binding.bottomNavBar.setupWithNavController(navController)
     }
 }
