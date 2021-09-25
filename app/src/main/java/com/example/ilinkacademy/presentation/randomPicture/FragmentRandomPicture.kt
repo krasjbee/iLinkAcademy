@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,8 +22,12 @@ class FragmentRandomPicture : Fragment(R.layout.fragment_random_picture) {
     private var _binding: FragmentRandomPictureBinding? = null
     private val binding get() = requireNotNull(_binding)
 
-    private fun showError() {
 
+    private fun showError(errorMessage: String) {
+        binding.piLoading.isVisible = false
+        binding.ivRandomPic.isVisible = true
+        binding.ivRandomPic.setImageResource(R.drawable.ic_baseline_cancel_24)
+        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
     }
 
     private fun showLoad() {
@@ -68,7 +73,7 @@ class FragmentRandomPicture : Fragment(R.layout.fragment_random_picture) {
                     binding.ivRandomPic.setImageDrawable(state.drawable)
                 }
                 is PictureState.Error -> {
-                    Log.d("qwe", "onViewCreated: Error ")
+                    showError(state.error)
                 }
             }
         }

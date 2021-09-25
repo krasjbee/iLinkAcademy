@@ -3,21 +3,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true">
 
     <ImageView
         android:id="@+id/iv_random_pic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/picture_size"
+        android:layout_height="@dimen/picture_size"
 
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginStart="@dimen/picture_margin"
+        android:layout_marginTop="@dimen/picture_margin"
+        android:layout_marginEnd="@dimen/picture_margin"
 
+        android:scaleType="centerCrop"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/pi_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="@dimen/picture_margin"
+        android:layout_marginTop="@dimen/picture_margin"
+        android:layout_marginEnd="@dimen/picture_margin"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:indicatorSize="96dp"
+        app:trackCornerRadius="36dp" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="iv_random_pic,pi_loading" />
 
     <Button
         android:id="@+id/bt_random_cat"
@@ -29,8 +58,7 @@
         app:layout_constraintEnd_toStartOf="@id/bt_random_duck"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toBottomOf="@id/iv_random_pic" />
+        app:layout_constraintTop_toBottomOf="@id/barrier_content" />
 
     <Button
         android:id="@+id/bt_random_duck"
@@ -41,7 +69,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/bt_random_cat"
-
-        app:layout_constraintTop_toBottomOf="@id/iv_random_pic" />
+        app:layout_constraintTop_toBottomOf="@id/barrier_content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
