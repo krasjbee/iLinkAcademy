@@ -26,6 +26,7 @@ class FragmentRandomPicture : Fragment(R.layout.fragment_random_picture) {
     private fun showError(errorMessage: String) {
         binding.piLoading.isVisible = false
         binding.ivRandomPic.isVisible = true
+        binding.tbLikeButton.isVisible = false
         binding.ivRandomPic.setImageResource(R.drawable.ic_baseline_cancel_24)
         Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
     }
@@ -33,16 +34,19 @@ class FragmentRandomPicture : Fragment(R.layout.fragment_random_picture) {
     private fun showLoad() {
         binding.piLoading.isVisible = true
         binding.ivRandomPic.isVisible = false
+        binding.tbLikeButton.isVisible = false
     }
 
     private fun showPicture() {
         binding.piLoading.isVisible = false
         binding.ivRandomPic.isVisible = true
+        binding.tbLikeButton.isVisible = true
     }
 
     private fun showInitialState() {
         binding.piLoading.isVisible = false
         binding.ivRandomPic.isVisible = false
+        binding.tbLikeButton.isVisible = false
     }
 
     override fun onCreateView(
@@ -69,7 +73,6 @@ class FragmentRandomPicture : Fragment(R.layout.fragment_random_picture) {
                 is PictureState.Success -> {
                     Log.d("qwe", "onViewCreated: Success ")
                     showPicture()
-//                    binding.ivRandomPic.load(state.drawable)
                     binding.ivRandomPic.setImageDrawable(state.drawable)
                 }
                 is PictureState.Error -> {

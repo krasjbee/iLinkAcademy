@@ -20,7 +20,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible"
         tools:src="@tools:sample/avatars" />
+
+    <ToggleButton
+        android:id="@+id/tb_like_button"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+
+        android:background="@drawable/favourite_selector"
+        android:backgroundTint="@color/white"
+
+        android:checked="false"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintBottom_toBottomOf="@id/iv_random_pic"
+        app:layout_constraintEnd_toEndOf="@id/iv_random_pic" />
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/pi_loading"
