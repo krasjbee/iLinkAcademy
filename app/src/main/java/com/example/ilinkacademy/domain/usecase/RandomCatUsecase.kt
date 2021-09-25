@@ -6,8 +6,9 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class RandomCatUsecase @Inject constructor(val repository: CatsRepository) {
-    operator fun invoke() = flow {
+class RandomCatUsecase @Inject constructor(val repository: CatsRepository) :
+    AbstractRandomAnimalUsecase() {
+    override operator fun invoke() = flow {
         emit(NetworkResource.Loading())
         val response = repository.getRandomCat()
         if (response.isSuccessful) {

@@ -1,5 +1,7 @@
 package com.example.ilinkacademy.di
 
+import android.content.Context
+import com.bumptech.glide.Glide
 import com.example.ilinkacademy.data.remote.CatsAPI
 import com.example.ilinkacademy.data.remote.DucksAPI
 import com.example.ilinkacademy.data.repository.CatsRepository
@@ -11,11 +13,11 @@ import com.example.ilinkacademy.utils.Constants.DUCKS_BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
-import javax.sql.CommonDataSource
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -40,10 +42,16 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideCatsRepository(catsRemoteDataSource: CatsAPI): CatsRepository = CatsRepositoryImpl(catsRemoteDataSource)
+    fun provideCatsRepository(catsRemoteDataSource: CatsAPI): CatsRepository =
+        CatsRepositoryImpl(catsRemoteDataSource)
 
     @Provides
     @Singleton
-    fun provideDucksRepository(duckRemoteDataSource: DucksAPI): DucksRepository = DucksRepositoryImpl(duckRemoteDataSource)
+    fun provideDucksRepository(duckRemoteDataSource: DucksAPI): DucksRepository =
+        DucksRepositoryImpl(duckRemoteDataSource)
+
+    @Provides
+    @Singleton
+    fun provideGlide(@ApplicationContext context: Context) = Glide.with(context)
 
 }

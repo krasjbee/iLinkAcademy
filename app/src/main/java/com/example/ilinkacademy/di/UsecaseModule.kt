@@ -2,6 +2,7 @@ package com.example.ilinkacademy.di
 
 import com.example.ilinkacademy.data.repository.CatsRepository
 import com.example.ilinkacademy.data.repository.DucksRepository
+import com.example.ilinkacademy.domain.usecase.AbstractRandomAnimalUsecase
 import com.example.ilinkacademy.domain.usecase.RandomCatUsecase
 import com.example.ilinkacademy.domain.usecase.RandomDuckUsecase
 import dagger.Module
@@ -16,11 +17,11 @@ object UsecaseModule {
 
     @Provides
     @ViewModelScoped
-    fun provideRandomDuckUsecase(repository: DucksRepository): RandomDuckUsecase =
+    fun provideRandomDuckUsecase(repository: DucksRepository): AbstractRandomAnimalUsecase =
         RandomDuckUsecase(repository)
 
     @Provides
     @ViewModelScoped
-    fun provideRandomCatUsecase(repository: CatsRepository): RandomCatUsecase =
+    fun provideRandomCatUsecase(repository: CatsRepository): AbstractRandomAnimalUsecase =
         RandomCatUsecase(repository)
 }
