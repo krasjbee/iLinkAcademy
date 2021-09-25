@@ -1,7 +1,7 @@
 package com.example.ilinkacademy.data.repository.impl
 
-import com.example.ilinkacademy.data.dto.DucksResponse
 import com.example.ilinkacademy.data.remote.DucksAPI
+import com.example.ilinkacademy.data.remote.dto.DucksResponse
 import com.example.ilinkacademy.data.repository.DucksRepository
 import retrofit2.Response
 import javax.inject.Inject

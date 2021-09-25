@@ -1,6 +1,6 @@
 package com.example.ilinkacademy.data.repository
 
-import com.example.ilinkacademy.data.dto.DucksResponse
+import com.example.ilinkacademy.data.remote.dto.DucksResponse
 import retrofit2.Response
 
 interface DucksRepository {

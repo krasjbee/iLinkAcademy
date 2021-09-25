@@ -1,6 +1,6 @@
 package com.example.ilinkacademy.data.remote
 
-import com.example.ilinkacademy.data.dto.CatResponse
+import com.example.ilinkacademy.data.remote.dto.CatResponse
 import retrofit2.Response
 import retrofit2.http.GET
 

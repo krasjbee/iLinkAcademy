@@ -1,4 +1,4 @@
-package com.example.ilinkacademy.data.dto
+package com.example.ilinkacademy.data.remote.dto
 
 
 import com.google.gson.annotations.SerializedName
