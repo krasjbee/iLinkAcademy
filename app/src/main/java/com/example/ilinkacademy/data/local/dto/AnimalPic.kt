@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 data class AnimalPic(
     @PrimaryKey
     val url: String,
-    val image: ByteArray
+    val imageUri: String
 )

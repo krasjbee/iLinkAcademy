@@ -1,5 +1,8 @@
 package com.example.ilinkacademy.presentation.randomPicture
 
+import android.content.Context
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,11 +12,14 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import com.example.ilinkacademy.R
 import com.example.ilinkacademy.databinding.FragmentRandomPictureBinding
 import com.example.ilinkacademy.presentation.MainActivityViewModel
 import com.example.ilinkacademy.utils.PictureState
+import com.example.ilinkacademy.utils.toByteArray
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
 
 @AndroidEntryPoint
 class FragmentRandomPicture : Fragment(R.layout.fragment_random_picture) {
@@ -49,6 +55,15 @@ class FragmentRandomPicture : Fragment(R.layout.fragment_random_picture) {
         binding.tbLikeButton.isVisible = false
     }
 
+    private fun saveToFile(drawable: Drawable, url: String): String {
+        val filename = url.substringAfterLast("/")
+        val file = File(context?.filesDir, filename)
+        context?.openFileOutput(filename, Context.MODE_PRIVATE).use { stream ->
+            stream?.write(drawable.toByteArray())
+        }
+        return Uri.fromFile(file).toString()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -59,11 +74,10 @@ class FragmentRandomPicture : Fragment(R.layout.fragment_random_picture) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-
+        var drawable: Drawable? = null
+        var url: String? = null
         viewModel.pictureLiveData.observe(viewLifecycleOwner) { state ->
             when (state) {
-                // FIXME: 25.09.2021 delete logs
                 is PictureState.Initial -> {
                     showInitialState()
                 }
@@ -73,7 +87,9 @@ class FragmentRandomPicture : Fragment(R.layout.fragment_random_picture) {
                 is PictureState.Success -> {
                     Log.d("qwe", "onViewCreated: Success ")
                     showPicture()
-                    binding.ivRandomPic.setImageDrawable(state.drawable)
+                    Glide.with(this).load(state.drawable).into(binding.ivRandomPic)
+                    drawable = state.drawable
+                    url = state.url.also { Log.d("url", "onViewCreated:$it ") }
                 }
                 is PictureState.Error -> {
                     showError(state.error)
@@ -83,6 +99,12 @@ class FragmentRandomPicture : Fragment(R.layout.fragment_random_picture) {
 
         binding.btRandomCat.setOnClickListener { viewModel.getRandomAnimal(MainActivityViewModel.Companion.Animal.CAT) }
         binding.btRandomDuck.setOnClickListener { viewModel.getRandomAnimal(MainActivityViewModel.Companion.Animal.DUCK) }
+        binding.tbLikeButton.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                val uri = saveToFile(drawable!!, url!!)
+                viewModel.saveToFavourites(uri, url!!.also { Log.d("file2", "onViewCreated:$it ") })
+            }
+        }
         super.onViewCreated(view, savedInstanceState)
     }
 

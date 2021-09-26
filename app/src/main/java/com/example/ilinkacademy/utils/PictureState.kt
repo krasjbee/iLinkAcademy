@@ -5,6 +5,6 @@ import android.graphics.drawable.Drawable
 sealed class PictureState {
     object Initial : PictureState()
     object Loading : PictureState()
-    class Success(val drawable: Drawable) : PictureState()
+    class Success(val drawable: Drawable, val url: String) : PictureState()
     class Error(val error: String) : PictureState()
 }

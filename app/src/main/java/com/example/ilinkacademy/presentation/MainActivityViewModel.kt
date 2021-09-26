@@ -11,7 +11,6 @@ import com.example.ilinkacademy.domain.usecase.RandomDuckUsecase
 import com.example.ilinkacademy.domain.usecase.SaveToDatabaseUsecase
 import com.example.ilinkacademy.utils.NetworkResource
 import com.example.ilinkacademy.utils.PictureState
-import com.example.ilinkacademy.utils.toByteArray
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -47,22 +46,22 @@ class MainActivityViewModel @Inject constructor(
                     val image = viewModelScope.async(Dispatchers.IO) {
                         glideRequestManager.load(resource.data).submit().get()
                     }
-                    _pictureLiveData.postValue(PictureState.Success(image.await()))
+                    _pictureLiveData.postValue(PictureState.Success(image.await(), resource.data!!))
                     // FIXME: 26.09.2021 delete after
-                    viewModelScope.launch(Dispatchers.IO) {
-                        resource.data?.let {
-                            saver(
-                                image.await().toByteArray(),
-                                it
-                            )
-                        }
-                    }
                 }
                 is NetworkResource.Error -> {
                     _pictureLiveData.postValue(PictureState.Error(resource.message!!))
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    fun saveToFavourites(uri: String, url: String) {
+        viewModelScope.launch {
+            saver(
+                uri = uri, url = url
+            )
+        }
     }
 
     companion object {
