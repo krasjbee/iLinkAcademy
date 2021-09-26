@@ -19,11 +19,11 @@
 
     <ImageButton
         android:id="@+id/tb_like_button"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="@dimen/like_toggle_button_size"
+        android:layout_height="@dimen/like_toggle_button_size"
 
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="@dimen/like_toggle_button_margin"
+        android:layout_marginBottom="@dimen/like_toggle_button_margin"
 
         android:backgroundTint="#00000000"
         android:src="@drawable/ic_baseline_delete_outline_24"

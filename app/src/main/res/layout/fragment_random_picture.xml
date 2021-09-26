@@ -25,11 +25,11 @@
 
     <ToggleButton
         android:id="@+id/tb_like_button"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="@dimen/like_toggle_button_size"
+        android:layout_height="@dimen/like_toggle_button_size"
 
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="@dimen/like_toggle_button_margin"
+        android:layout_marginBottom="@dimen/like_toggle_button_margin"
 
         android:background="@drawable/favourite_selector"
         android:backgroundTint="@color/white"
@@ -55,8 +55,8 @@
 
         android:indeterminate="true"
         android:visibility="gone"
-        app:indicatorSize="96dp"
-        app:trackCornerRadius="36dp" />
+        app:indicatorSize="@dimen/progress_bar_radius"
+        app:trackCornerRadius="@dimen/progress_bar_corner_radius" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier_content"
