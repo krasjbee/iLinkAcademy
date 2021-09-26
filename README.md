@@ -19,7 +19,7 @@ App architecture : MVVM
 - English
 
 ## To be fixed : 
--Horizontal orientation
+- Horizontal orientation
 
 ## Screenshots
 
