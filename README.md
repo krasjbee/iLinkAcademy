@@ -12,3 +12,8 @@
 - [Android ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel-savedstate)
 
 ## App architecture : MVVM
+
+## Languages :
+
+- Russian
+- English
