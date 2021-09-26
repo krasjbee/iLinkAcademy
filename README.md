@@ -11,9 +11,16 @@
 - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
 - [Android ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel-savedstate)
 
-## App architecture : MVVM
+App architecture : MVVM
 
 ## Languages :
 
 - Russian
 - English
+
+## Screenshots
+
+
+![start_ru](https://user-images.githubusercontent.com/61374472/134817687-2be8274b-b004-4638-b71f-ee4b630fccd7.png)
+![favs_ru](https://user-images.githubusercontent.com/61374472/134817693-2ae29a8b-a9a9-49e7-8398-2aff28dfeb70.png)
+
