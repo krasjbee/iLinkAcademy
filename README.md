@@ -18,6 +18,9 @@ App architecture : MVVM
 - Russian
 - English
 
+## To be fixed : 
+-Horizontal orientation
+
 ## Screenshots
 
 
