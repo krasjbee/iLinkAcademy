@@ -34,6 +34,9 @@ class RandomPictureViewModel @Inject constructor(
     val pictureLiveData: LiveData<PictureState> = _pictureLiveData
     private var favList: List<String>? = null
 
+    /**
+     * returns is element in favourites
+     */
     private fun isFavourite(url: String): Boolean? {
         dao.getAllPictures().onEach { list ->
             favList = list.map { it.url }
@@ -53,7 +56,7 @@ class RandomPictureViewModel @Inject constructor(
     }
 
     /**
-     * Gets random picture of animal according to @param[animal]
+     * Gets random picture of animal
      */
     fun getRandomAnimal(animal: Animal) {
         val usecase: AbstractRandomAnimalUsecase = when (animal) {
@@ -76,7 +79,6 @@ class RandomPictureViewModel @Inject constructor(
                             isFavourite(resource.data)
                         )
                     )
-                    // FIXME: 26.09.2021 delete after
                 }
                 is NetworkResource.Error -> {
                     _pictureLiveData.postValue(PictureState.Error(resource.message!!))

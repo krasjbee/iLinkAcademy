@@ -17,7 +17,6 @@ class FavouritesViewModel @Inject constructor(
 ) :
     ViewModel() {
 
-    // TODO: 26.09.2021 add adapter and load images
     val savedPiscLiveData = dao.getAllPictures().asLiveData()
 
     fun deleteElement(animalPic: AnimalPic) {

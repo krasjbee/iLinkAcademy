@@ -22,6 +22,9 @@ class FragmentFavourites : Fragment(R.layout.fragment_favourites) {
     private val binding get() = requireNotNull(_binding)
     private val favouritesViewModel by viewModels<FavouritesViewModel>()
 
+    /**
+     * deletes file form local folder
+     */
     private fun deleteFromDisk(animalPic: AnimalPic) {
         val uri = URI(animalPic.imageUri)
         val file = File(uri)
