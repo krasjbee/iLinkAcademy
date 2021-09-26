@@ -3,10 +3,7 @@ package com.example.ilinkacademy.di
 import com.example.ilinkacademy.data.local.AnimalPicDao
 import com.example.ilinkacademy.data.repository.CatsRepository
 import com.example.ilinkacademy.data.repository.DucksRepository
-import com.example.ilinkacademy.domain.usecase.AbstractRandomAnimalUsecase
-import com.example.ilinkacademy.domain.usecase.RandomCatUsecase
-import com.example.ilinkacademy.domain.usecase.RandomDuckUsecase
-import com.example.ilinkacademy.domain.usecase.SaveToDatabaseUsecase
+import com.example.ilinkacademy.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,4 +28,10 @@ object UsecaseModule {
     @ViewModelScoped
     fun provideDatabaseSaveUsecase(dao: AnimalPicDao): SaveToDatabaseUsecase =
         SaveToDatabaseUsecase(dao)
+
+    @Provides
+    @ViewModelScoped
+    fun provideGetSavedPicsUsecase(dao: AnimalPicDao): GetSavedPicsUsecase =
+        GetSavedPicsUsecase(dao)
+
 }
