@@ -1,12 +1,13 @@
 package com.example.ilinkacademy.presentation.favourites
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.ilinkacademy.R
 import com.example.ilinkacademy.databinding.FragmentFavouritesBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,6 +19,7 @@ class FragmentFavourites : Fragment(R.layout.fragment_favourites) {
     private val binding get() = requireNotNull(_binding)
     private val favouritesViewModel by viewModels<FavouritesViewModel>()
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,11 +30,19 @@ class FragmentFavourites : Fragment(R.layout.fragment_favourites) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        favouritesViewModel.savedPiscLiveData.observe(viewLifecycleOwner) {
-            it.forEach {
-                Log.d("qwe", "onViewCreated: ${it.url}")
-            }
+
+        val manager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        val adapter = FavouritesAdapter {
+            favouritesViewModel.deleteElement(it)
         }
+        binding.rvSavedPictures.apply {
+            this.adapter = adapter
+            this.layoutManager = manager
+        }
+        favouritesViewModel.savedPiscLiveData.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
+
         super.onViewCreated(view, savedInstanceState)
     }
 

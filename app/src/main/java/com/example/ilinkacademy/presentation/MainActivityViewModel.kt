@@ -31,7 +31,9 @@ class MainActivityViewModel @Inject constructor(
         MutableLiveData(PictureState.Initial)
     val pictureLiveData: LiveData<PictureState> = _pictureLiveData
 
-
+    /**
+     * Gets random picture of animal according to @param[animal]
+     */
     fun getRandomAnimal(animal: Animal) {
         val usecase: AbstractRandomAnimalUsecase = when (animal) {
             Animal.DUCK -> randomDuckUsecase
@@ -56,6 +58,9 @@ class MainActivityViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
+    /**
+     * saves to database file uri using url as primary key
+     */
     fun saveToFavourites(uri: String, url: String) {
         viewModelScope.launch {
             saver(

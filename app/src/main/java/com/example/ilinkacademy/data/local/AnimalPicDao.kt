@@ -11,7 +11,7 @@ interface AnimalPicDao {
     fun getAllPictures(): Flow<List<AnimalPic>>
 
     @Delete
-    fun deletePicture(picture: AnimalPic)
+    suspend fun deletePicture(picture: AnimalPic)
 
     @Query("DELETE FROM pictures")
     suspend fun deleteAll()

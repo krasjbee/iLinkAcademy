@@ -28,7 +28,9 @@ class FragmentRandomPicture : Fragment(R.layout.fragment_random_picture) {
     private var _binding: FragmentRandomPictureBinding? = null
     private val binding get() = requireNotNull(_binding)
 
-
+    /**
+     * Shows in toast also shows error indicator
+     */
     private fun showError(errorMessage: String) {
         binding.piLoading.isVisible = false
         binding.ivRandomPic.isVisible = true
@@ -37,24 +39,36 @@ class FragmentRandomPicture : Fragment(R.layout.fragment_random_picture) {
         Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
     }
 
+    /**
+     * Shows load indication
+     */
     private fun showLoad() {
         binding.piLoading.isVisible = true
         binding.ivRandomPic.isVisible = false
         binding.tbLikeButton.isVisible = false
     }
 
+    /**
+     * Shows picture in case of successful request
+     */
     private fun showPicture() {
         binding.piLoading.isVisible = false
         binding.ivRandomPic.isVisible = true
         binding.tbLikeButton.isVisible = true
     }
 
+    /**
+     * Shows initial state of current screen
+     */
     private fun showInitialState() {
         binding.piLoading.isVisible = false
         binding.ivRandomPic.isVisible = false
         binding.tbLikeButton.isVisible = false
     }
 
+    /**
+     * Saves file named as end of url to local folder
+     */
     private fun saveToFile(drawable: Drawable, url: String): String {
         val filename = url.substringAfterLast("/")
         val file = File(context?.filesDir, filename)
