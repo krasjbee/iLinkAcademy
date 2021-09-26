@@ -1,10 +1,11 @@
-package com.example.ilinkacademy.presentation
+package com.example.ilinkacademy.presentation.randomPicture
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.RequestManager
+import com.example.ilinkacademy.data.local.AnimalPicDao
 import com.example.ilinkacademy.domain.usecase.AbstractRandomAnimalUsecase
 import com.example.ilinkacademy.domain.usecase.RandomCatUsecase
 import com.example.ilinkacademy.domain.usecase.RandomDuckUsecase
@@ -20,11 +21,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainActivityViewModel @Inject constructor(
+class RandomPictureViewModel @Inject constructor(
     private val randomCatUsecase: RandomCatUsecase,
     private val randomDuckUsecase: RandomDuckUsecase,
     private val glideRequestManager: RequestManager,
-    private val saver: SaveToDatabaseUsecase
+    private val saver: SaveToDatabaseUsecase,
+    private val dao: AnimalPicDao
 ) : ViewModel() {
 
     private val _pictureLiveData: MutableLiveData<PictureState> =
@@ -57,6 +59,7 @@ class MainActivityViewModel @Inject constructor(
             }
         }.launchIn(viewModelScope)
     }
+
 
     /**
      * saves to database file uri using url as primary key

@@ -9,8 +9,11 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ilinkacademy.R
+import com.example.ilinkacademy.data.local.dto.AnimalPic
 import com.example.ilinkacademy.databinding.FragmentFavouritesBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
+import java.net.URI
 
 @AndroidEntryPoint
 class FragmentFavourites : Fragment(R.layout.fragment_favourites) {
@@ -19,6 +22,11 @@ class FragmentFavourites : Fragment(R.layout.fragment_favourites) {
     private val binding get() = requireNotNull(_binding)
     private val favouritesViewModel by viewModels<FavouritesViewModel>()
 
+    private fun deleteFromDisk(animalPic: AnimalPic) {
+        val qwe = URI(animalPic.imageUri)
+        val file = File(qwe)
+        file.delete()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,10 +38,10 @@ class FragmentFavourites : Fragment(R.layout.fragment_favourites) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         val manager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        val adapter = FavouritesAdapter {
-            favouritesViewModel.deleteElement(it)
+        val adapter = FavouritesAdapter { animalPic ->
+            favouritesViewModel.deleteElement(animalPic)
+            deleteFromDisk(animalPic)
         }
         binding.rvSavedPictures.apply {
             this.adapter = adapter

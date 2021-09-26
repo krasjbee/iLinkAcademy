@@ -15,7 +15,6 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.ilinkacademy.R
 import com.example.ilinkacademy.databinding.FragmentRandomPictureBinding
-import com.example.ilinkacademy.presentation.MainActivityViewModel
 import com.example.ilinkacademy.utils.PictureState
 import com.example.ilinkacademy.utils.toByteArray
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,7 +23,7 @@ import java.io.File
 @AndroidEntryPoint
 class FragmentRandomPicture : Fragment(R.layout.fragment_random_picture) {
 
-    private val viewModel by viewModels<MainActivityViewModel>()
+    private val viewModel by viewModels<RandomPictureViewModel>()
     private var _binding: FragmentRandomPictureBinding? = null
     private val binding get() = requireNotNull(_binding)
 
@@ -111,13 +110,14 @@ class FragmentRandomPicture : Fragment(R.layout.fragment_random_picture) {
             }
         }
 
-        binding.btRandomCat.setOnClickListener { viewModel.getRandomAnimal(MainActivityViewModel.Companion.Animal.CAT) }
-        binding.btRandomDuck.setOnClickListener { viewModel.getRandomAnimal(MainActivityViewModel.Companion.Animal.DUCK) }
+        binding.btRandomCat.setOnClickListener { viewModel.getRandomAnimal(RandomPictureViewModel.Companion.Animal.CAT) }
+        binding.btRandomDuck.setOnClickListener { viewModel.getRandomAnimal(RandomPictureViewModel.Companion.Animal.DUCK) }
         binding.tbLikeButton.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 val uri = saveToFile(drawable!!, url!!)
                 viewModel.saveToFavourites(uri, url!!.also { Log.d("file2", "onViewCreated:$it ") })
             }
+
         }
         super.onViewCreated(view, savedInstanceState)
     }
