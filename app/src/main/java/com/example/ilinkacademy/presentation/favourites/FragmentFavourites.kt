@@ -23,8 +23,8 @@ class FragmentFavourites : Fragment(R.layout.fragment_favourites) {
     private val favouritesViewModel by viewModels<FavouritesViewModel>()
 
     private fun deleteFromDisk(animalPic: AnimalPic) {
-        val qwe = URI(animalPic.imageUri)
-        val file = File(qwe)
+        val uri = URI(animalPic.imageUri)
+        val file = File(uri)
         file.delete()
     }
 

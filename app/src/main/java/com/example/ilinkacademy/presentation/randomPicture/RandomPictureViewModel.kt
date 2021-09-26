@@ -32,6 +32,25 @@ class RandomPictureViewModel @Inject constructor(
     private val _pictureLiveData: MutableLiveData<PictureState> =
         MutableLiveData(PictureState.Initial)
     val pictureLiveData: LiveData<PictureState> = _pictureLiveData
+    private var favList: List<String>? = null
+
+    private fun isFavourite(url: String): Boolean? {
+        dao.getAllPictures().onEach { list ->
+            favList = list.map { it.url }
+        }.launchIn(viewModelScope)
+        return favList?.contains(url)
+    }
+
+    /**
+     * saves to database file uri using url as primary key
+     */
+    fun saveToFavourites(uri: String, url: String) {
+        viewModelScope.launch {
+            saver(
+                uri = uri, url = url
+            )
+        }
+    }
 
     /**
      * Gets random picture of animal according to @param[animal]
@@ -50,7 +69,13 @@ class RandomPictureViewModel @Inject constructor(
                     val image = viewModelScope.async(Dispatchers.IO) {
                         glideRequestManager.load(resource.data).submit().get()
                     }
-                    _pictureLiveData.postValue(PictureState.Success(image.await(), resource.data!!))
+                    _pictureLiveData.postValue(
+                        PictureState.Success(
+                            image.await(),
+                            resource.data!!,
+                            isFavourite(resource.data)
+                        )
+                    )
                     // FIXME: 26.09.2021 delete after
                 }
                 is NetworkResource.Error -> {
@@ -60,17 +85,6 @@ class RandomPictureViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-
-    /**
-     * saves to database file uri using url as primary key
-     */
-    fun saveToFavourites(uri: String, url: String) {
-        viewModelScope.launch {
-            saver(
-                uri = uri, url = url
-            )
-        }
-    }
 
     companion object {
         enum class Animal { DUCK, CAT }

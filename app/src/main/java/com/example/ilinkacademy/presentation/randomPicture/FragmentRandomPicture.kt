@@ -102,7 +102,8 @@ class FragmentRandomPicture : Fragment(R.layout.fragment_random_picture) {
                     showPicture()
                     Glide.with(this).load(state.drawable).into(binding.ivRandomPic)
                     drawable = state.drawable
-                    url = state.url.also { Log.d("url", "onViewCreated:$it ") }
+                    url = state.url
+                    binding.tbLikeButton.isChecked = state.isFav ?: false
                 }
                 is PictureState.Error -> {
                     showError(state.error)
@@ -115,9 +116,8 @@ class FragmentRandomPicture : Fragment(R.layout.fragment_random_picture) {
         binding.tbLikeButton.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 val uri = saveToFile(drawable!!, url!!)
-                viewModel.saveToFavourites(uri, url!!.also { Log.d("file2", "onViewCreated:$it ") })
+                viewModel.saveToFavourites(uri, url!!)
             }
-
         }
         super.onViewCreated(view, savedInstanceState)
     }
