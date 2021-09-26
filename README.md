@@ -20,6 +20,7 @@ App architecture : MVVM
 
 ## To be fixed : 
 - Horizontal orientation
+- Resize README.md pics :)
 
 ## Screenshots
 
