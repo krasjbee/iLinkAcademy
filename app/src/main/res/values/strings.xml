@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">iLinkAcademy</string>
+    <string name="app_name" translatable="false">iLinkAcademy</string>
     <string name="bottom_menu_picture_label">Pictures</string>
     <string name="bottom_menu_favourites_label">Favourites</string>
     <string name="bt_random_cat_label">Random cat</string>
     <string name="bt_random_duck_label">Random duck</string>
+    <string name="toolbar_text_favourites">Favourites</string>
+    <string name="toolbar_text_random_pics">Random picture</string>
 </resources>

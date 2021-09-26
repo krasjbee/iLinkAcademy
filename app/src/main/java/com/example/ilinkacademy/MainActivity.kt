@@ -22,8 +22,10 @@ class MainActivity : AppCompatActivity() {
         val navController = navHost.navController
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.fragmentFavourites -> binding.toolbar.title = "Favourites"
-                R.id.fragmentRandomPicture -> binding.toolbar.title = "Random picture"
+                R.id.fragmentFavourites -> binding.toolbar.title =
+                    getString(R.string.toolbar_text_favourites)
+                R.id.fragmentRandomPicture -> binding.toolbar.title =
+                    getString(R.string.toolbar_text_random_pics)
             }
         }
         binding.bottomNavBar.setupWithNavController(navController)

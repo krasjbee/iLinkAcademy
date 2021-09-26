@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bottom_menu_picture_label">Картинки</string>
+    <string name="bottom_menu_favourites_label">Избранное</string>
+    <string name="bt_random_cat_label">Показать котика</string>
+    <string name="bt_random_duck_label">Показать утку</string>
+    <string name="toolbar_text_favourites">Избранное</string>
+    <string name="toolbar_text_random_pics">Случайная картинка</string>
+</resources>
